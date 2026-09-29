@@ -466,6 +466,65 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &933459165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 933459167}
+  - component: {fileID: 933459166}
+  - component: {fileID: 933459168}
+  m_Layer: 0
+  m_Name: Placers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &933459166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933459165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de5bf84eb555434d9c81035ebf15725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PoopPlacer
+  PoopPrefab: {fileID: 7186350723041052994, guid: 3aec56e278d813140861883d94ebf04c, type: 3}
+--- !u!4 &933459167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933459165}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5249, y: -0.35842, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &933459168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933459165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c7d74fdfe6d84498c70297194f856a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BeerPlacer
+  BeerPrefab: {fileID: 4930352289812738094, guid: 74a88ba729920e64da5b529d234e0a73, type: 3}
 --- !u!1 &1060811476
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,7 +554,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc614f3143f2c643a686ba55a29b174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KeyboardInput
-  corgi: {fileID: 844331920}
+  Corgi: {fileID: 844331920}
+  PoopPlacer: {fileID: 933459166}
 --- !u!4 &1060811478
 Transform:
   m_ObjectHideFlags: 0
@@ -612,3 +672,4 @@ SceneRoots:
   - {fileID: 1937492191}
   - {fileID: 844331922}
   - {fileID: 1060811478}
+  - {fileID: 933459167}

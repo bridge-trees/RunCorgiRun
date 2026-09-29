@@ -29,4 +29,9 @@ public class Corgi : MonoBehaviour
         }
     }
 
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
+
 }
