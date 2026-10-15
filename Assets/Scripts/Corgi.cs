@@ -1,17 +1,70 @@
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Corgi : MonoBehaviour
 {
+    public UI UI;
     private SpriteRenderer corgiSpriteRenderer;
     public Sprite DrunkSprite;
     public Sprite SoberSprite;
 
     private bool isDrunk = false;
+    private bool isPlastered = false;
+
+    private int randomMoveCounter = 120;
+    private int lastRandomDirection = 0;
+    
+    private Coroutine soberUpCoroutine;
 
     public void Awake()
     {
         corgiSpriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void Update()
+    {
+        if (isPlastered)
+        {
+            MoveRandomly();
+        }
+    }
+
+    private void MoveRandomly()
+    {
+        int direction = lastRandomDirection;
+        
+        if (randomMoveCounter == 0)
+        {
+            direction = Random.Range(0, 4);
+            lastRandomDirection = direction;
+            randomMoveCounter = Random.Range(60, 240);
+        }
+        
+        switch (direction)
+        {
+            case 0:
+                Move(new Vector2(1, 0));
+                break;
+            case 1:
+                Move(new Vector2(-1, 0));
+                break;
+            case 2:
+                Move(new Vector2(0, 1));
+                break;
+            case 3:
+                Move(new Vector2(0, -1));
+                break;
+        }
+        randomMoveCounter--;
+    }
+
+    public void MoveManually(Vector2 direction)
+    {
+        if (isPlastered == false)
+        {
+            Move(direction);
+        }
     }
 
     public void Move(Vector2 direction)
@@ -35,6 +88,15 @@ public class Corgi : MonoBehaviour
         return direction;
     }
 
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Moonshine"))
+        {
+            Destroy(other.gameObject);
+            GetPlastered();
+        }
+    }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Beer"))
@@ -52,23 +114,40 @@ public class Corgi : MonoBehaviour
         {
             ScorePoint();
             Destroy(other.gameObject);
+            print("score is: " + ScoreKeeper.GetScore());
         }
     }
 
     private void ScorePoint()
     {
-        print("goal");
+        ScoreKeeper.AddPoint();
+        UI.SetScoreText(ScoreKeeper.GetScore());
+    }
+
+    private void Inebriate()
+    {
+        ChangeToDrunkSprite();
+        StartSoberingUp();
+    }
+    
+    private void GetPlastered()
+    {
+        isPlastered = true;
+        Inebriate();
     }
 
     private void GetDrunk()
     {
         isDrunk = true;
-        ChangeToDrunkSprite();
-        StartSoberingUp();
+        Inebriate();
     }
     private void StartSoberingUp()
     {
-        StartCoroutine(CountdownUntilSober());
+        if (soberUpCoroutine != null)
+        {
+            StopCoroutine(soberUpCoroutine);
+        }
+        soberUpCoroutine = StartCoroutine(CountdownUntilSober());
     }
 
     IEnumerator CountdownUntilSober()
@@ -80,6 +159,7 @@ public class Corgi : MonoBehaviour
     private void SoberUp()
     {
         isDrunk = false;
+        isPlastered = false;
         ChangeToSoberSprite();
     }
 
