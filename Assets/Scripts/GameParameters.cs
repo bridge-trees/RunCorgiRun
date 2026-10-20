@@ -2,6 +2,8 @@ using UnityEngine;
 
 public static class GameParameters
 {
+   public static int GameDurationInSeconds = 5;
+   
    public static float CorgiMoveSpeed = 6f;
    public static float CorgiDrunkSeconds = 5f;
    
