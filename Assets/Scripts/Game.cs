@@ -4,6 +4,13 @@ public class Game : MonoBehaviour
 {
     public GameTimer GameTimer;
     public UI UI;
+    
+    public BonePlacer BonePlacer;
+    public BeerPlacer BeerPlacer;
+    public MoonshinePlacer MoonshinePlacer;
+    public PillPlacer PillPlacer;
+    
+    public Corgi Corgi;
 
     public void Start()
     {
@@ -17,13 +24,45 @@ public class Game : MonoBehaviour
     
     public void OnStartButtonClicked()
     {
-        GameTimer.StartTimer(GameParameters.GameDurationInSeconds, OnTimerFinished);
-        UI.HideStartScreen();
+        InitializeGame();
+    }
+
+    public void OnPlayAgainButtonClicked()
+    {
+        InitializeGame();
+        UI.HideGameOverScreen();
+    }
+
+    public void StartPlacers()
+    {
+        BonePlacer.StartPlacing();
+        BeerPlacer.StartPlacing();
+        MoonshinePlacer.StartPlacing();
+        PillPlacer.StartPlacing();
+    }
+
+    public void StopPlacers()
+    {
+        BonePlacer.StopPlacing();
+        BeerPlacer.StopPlacing();
+        MoonshinePlacer.StopPlacing();
+        PillPlacer.StopPlacing();
     }
 
     public void OnTimerFinished()
     {
         print("Game finished");
         UI.ShowGameOverScreen();
+        StopPlacers();
+    }
+
+    public void InitializeGame()
+    {
+        GameTimer.StartTimer(GameParameters.GameDurationInSeconds, OnTimerFinished);
+        UI.HideStartScreen();
+        StartPlacers();
+        Corgi.Reset();
+        ScoreKeeper.ResetScore();
+        UI.SetScoreText(ScoreKeeper.GetScore());
     }
 }
