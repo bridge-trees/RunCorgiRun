@@ -8,6 +8,7 @@ public class Corgi : MonoBehaviour
     private SpriteRenderer corgiSpriteRenderer;
     public Sprite DrunkSprite;
     public Sprite SoberSprite;
+    public Sounds Sounds;
 
     private bool isDrunk = false;
     private bool isPlastered = false;
@@ -104,6 +105,7 @@ public class Corgi : MonoBehaviour
         {
             Destroy(other.gameObject);
             GetPlastered();
+            Sounds.PlayMoonshineSound();
         }
     }
 
@@ -113,11 +115,14 @@ public class Corgi : MonoBehaviour
         {
             Destroy(other.gameObject);
             GetDrunk();
+            Sounds.PlayBeerSound();
         }
 
         if (other.gameObject.CompareTag("Pill"))
         {
+            Destroy(other.gameObject);
             SoberUp();
+            Sounds.PlayPillSound();
         }
         
         if (other.gameObject.CompareTag("Bone"))
@@ -125,6 +130,7 @@ public class Corgi : MonoBehaviour
             ScorePoint();
             Destroy(other.gameObject);
             print("score is: " + ScoreKeeper.GetScore());
+            Sounds.PlayBoneSound();
         }
     }
 
