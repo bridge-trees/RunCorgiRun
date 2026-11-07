@@ -12,10 +12,14 @@ public static class GameParameters
    public static float BeerSecondsOnScreen = 7f;
    public static float BeerMinimumSecondsToWait = 1f;
    public static float BeerMaximumSecondsToWait = 3f;
+   public static float BeerPulseAmount = 0.4f;
+   public static float BeerPulseSpeed = 5f;
    
    public static float BoneSecondsOnScreen = 2f;
    public static float BoneMinimumSecondsToWait = .1f;
    public static float BoneMaximumSecondsToWait = .5f;
+   public static float BoneWaggleAngle = 45f;
+   public static float BoneWaggleSpeed = 1f;
    
    public static float WaterBowlSecondsOnScreen = 2f;
    public static float WaterBowlMinimumSecondsToWait = 1f;
@@ -24,6 +28,7 @@ public static class GameParameters
    public static float PillSecondsOnScreen = 5f;
    public static float PillMinimumSecondsToWait = 2f;
    public static float PillMaximumSecondsToWait = 5f;
+   public static float PillSpinDegreesPerSecond = 360f;
    
    public static float MoonshineSecondsOnScreen = 5f;
    public static float MoonshineMinimumSecondsToWait = 0.5f;
